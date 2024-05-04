@@ -1,0 +1,15 @@
+.error {
+  color: red;
+  font-size: 12px;
+  transform: translateY(-1.2rem);
+  animation: 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
