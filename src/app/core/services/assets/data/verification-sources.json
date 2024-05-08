@@ -1,0 +1,135 @@
+[
+    {
+        "id": 347,
+        "descripcion": "PEI",
+        "peso": 3,
+        "idescala": false,
+        "valoracion": null
+    },
+    {
+        "id": 348,
+        "descripcion": "PCI",
+        "peso": 3,
+        "idescala": false,
+        "valoracion": null
+    },
+    {
+        "id": 349,
+        "descripcion": "RI",
+        "peso": 3,
+        "idescala": false,
+        "valoracion": null
+    },
+    {
+        "id": 350,
+        "descripcion": "PAT",
+        "peso": 3,
+        "idescala": false,
+        "valoracion": null
+    },
+    {
+        "id": 351,
+        "descripcion": "Proceedings",
+        "peso": 3,
+        "idescala": false,
+        "valoracion": null
+    },
+    {
+        "id": 352,
+        "descripcion": "Dissemination media (social networks, circulars, emails, press releases, letters, videos, etc.)",
+        "peso": 3,
+        "idescala": false,
+        "valoracion": null
+    },
+    {
+        "id": 662,
+        "descripcion": "Interview",
+        "peso": 3,
+        "idescala": false,
+        "valoracion": null
+    },
+    {
+        "id": 329,
+        "descripcion": "Creation resolution",
+        "peso": 3,
+        "idescala": false,
+        "valoracion": null
+    },
+    {
+        "id": 330,
+        "descripcion": "Operating license",
+        "peso": 3,
+        "idescala": false,
+        "valoracion": null
+    },
+    {
+        "id": 331,
+        "descripcion": "Directorial Resolution of management instruments.",
+        "peso": 3,
+        "idescala": false,
+        "valoracion": null
+    },
+    {
+        "id": 332,
+        "descripcion": "Resolution appointing the director",
+        "peso": 3,
+        "idescala": false,
+        "valoracion": null
+    },
+    {
+        "id": 333,
+        "descripcion": "Modular code by level",
+        "peso": 3,
+        "idescala": false,
+        "valoracion": null
+    },
+    {
+        "id": 588,
+        "descripcion": "RUC file",
+        "peso": 3,
+        "idescala": false,
+        "valoracion": null
+    },
+    {
+        "id": 660,
+        "descripcion": "INDECI",
+        "peso": 3,
+        "idescala": false,
+        "valoracion": null
+    },
+    {
+        "id": 341,
+        "descripcion": "Rules of Procedure",
+        "peso": 3,
+        "idescala": false,
+        "valoracion": null
+    },
+    {
+        "id": 342,
+        "descripcion": "Process map",
+        "peso": 3,
+        "idescala": false,
+        "valoracion": null
+    },
+    {
+        "id": 343,
+        "descripcion": "Process and procedure sheets",
+        "peso": 3,
+        "idescala": false,
+        "valoracion": null
+    },
+    {
+        "id": 344,
+        "descripcion": "Flowcharts",
+        "peso": 3,
+        "idescala": false,
+        "valoracion": null
+    },
+    {
+        "id": 345,
+        "descripcion": "Organization and functions manual",
+        "peso": 3,
+        "idescala": false,
+        "valoracion": null
+    }
+]

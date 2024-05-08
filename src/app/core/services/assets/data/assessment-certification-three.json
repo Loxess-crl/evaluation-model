@@ -1,0 +1,51 @@
+{
+    "id": 56,
+    "nombre": "03 Organization by processes",
+    "descripcion": "The educational institution is managed from a process approach (strategic, key and support) from level 0 and 1. These processes are known, implemented and executed in daily actions, in such a way that they optimize management by making it effective and efficient. , in compliance with the PHVA continuous improvement cycle.",
+    "valoracion": null,
+    "hallazgo": null,
+    "fuentesVerificacion": [
+        {
+            "id": 341,
+            "descripcion": "Rules of Procedure",
+            "peso": 3,
+            "idescala": false,
+            "valoracion": null
+        },
+        {
+            "id": 342,
+            "descripcion": "Process map",
+            "peso": 3,
+            "idescala": false,
+            "valoracion": null
+        },
+        {
+            "id": 343,
+            "descripcion": "Process and procedure sheets",
+            "peso": 3,
+            "idescala": false,
+            "valoracion": null
+        },
+        {
+            "id": 344,
+            "descripcion": "Flowcharts",
+            "peso": 3,
+            "idescala": false,
+            "valoracion": null
+        },
+        {
+            "id": 345,
+            "descripcion": "Organization and functions manual",
+            "peso": 3,
+            "idescala": false,
+            "valoracion": null
+        },
+        {
+            "id": 662,
+            "descripcion": "Interview",
+            "peso": 3,
+            "idescala": false,
+            "valoracion": null
+        }
+    ]
+}

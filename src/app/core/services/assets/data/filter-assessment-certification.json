@@ -1,0 +1,96 @@
+{
+  "finding": "",
+  "recommendation": "",
+  "certifications": [
+    {
+      "id": 12,
+      "name": "Cetificación I",
+      "description": "Gestión educativa y liderazgo institucional",
+      "notRequest": false,
+      "hasCertificate": false,
+      "show": false,
+      "requirements": [
+        {
+          "id": 54,
+          "name": "01 Legal constitution",
+          "porcentage": 0
+        },
+        {
+          "id": 55,
+          "name": "02 Aims and purposes",
+          "porcentage": 0
+        },
+        {
+          "id": 56,
+          "name": "03 Organization by processes",
+          "porcentage": 0
+        },
+        {
+          "id": 57,
+          "name": "04 Management instruments",
+          "porcentage": 0
+        }
+      ]
+    },
+    {
+      "id": 56,
+      "name": "Cetificación II",
+      "description": "Procesos de enseñanza y aprendizaje para el logro del perfil de egreso",
+      "notRequest": false,
+      "hasCertificate": false,
+      "show": false,
+      "requirements": [
+        {
+          "id": 54,
+          "name": "01 Legal constitution",
+          "porcentage": 0
+        },
+        {
+          "id": 55,
+          "name": "02 Aims and purposes",
+          "porcentage": 0
+        },
+        {
+          "id": 56,
+          "name": "03 Organization by processes",
+          "porcentage": 0
+        },
+        {
+          "id": 57,
+          "name": "04 Management instruments",
+          "porcentage": 0
+        }
+      ]
+    },
+    {
+      "id": 57,
+      "name": "Cetificación III",
+      "description": "Tutoría y convivencia",
+      "notRequest": false,
+      "hasCertificate": false,
+      "show": false,
+      "requirements": [
+        {
+          "id": 54,
+          "name": "01 Legal constitution",
+          "porcentage": 0
+        },
+        {
+          "id": 55,
+          "name": "02 Aims and purposes",
+          "porcentage": 0
+        },
+        {
+          "id": 56,
+          "name": "03 Organization by processes",
+          "porcentage": 0
+        },
+        {
+          "id": 57,
+          "name": "04 Management instruments",
+          "porcentage": 0
+        }
+      ]
+    }
+  ]
+}

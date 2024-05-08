@@ -1,0 +1,58 @@
+{
+    "id": 57,
+    "nombre": "04 Management instruments",
+    "descripcion": "The educational institution has updated management instruments, and they are disseminated, known and applied by all members of the organization.",
+    "valoracion": null,
+    "hallazgo": null,
+    "fuentesVerificacion": [
+        {
+            "id": 347,
+            "descripcion": "PEI",
+            "peso": 3,
+            "idescala": false,
+            "valoracion": null
+        },
+        {
+            "id": 348,
+            "descripcion": "PCI",
+            "peso": 3,
+            "idescala": false,
+            "valoracion": null
+        },
+        {
+            "id": 349,
+            "descripcion": "RI",
+            "peso": 3,
+            "idescala": false,
+            "valoracion": null
+        },
+        {
+            "id": 350,
+            "descripcion": "PAT",
+            "peso": 3,
+            "idescala": false,
+            "valoracion": null
+        },
+        {
+            "id": 351,
+            "descripcion": "Proceedings",
+            "peso": 3,
+            "idescala": false,
+            "valoracion": null
+        },
+        {
+            "id": 352,
+            "descripcion": "Dissemination media (social networks, circulars, emails, press releases, letters, videos, etc.)",
+            "peso": 3,
+            "idescala": false,
+            "valoracion": null
+        },
+        {
+            "id": 662,
+            "descripcion": "Interview",
+            "peso": 3,
+            "idescala": false,
+            "valoracion": null
+        }
+    ]
+}
