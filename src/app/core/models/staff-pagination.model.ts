@@ -5,7 +5,7 @@ export interface StaffPagination {
   currentPage: number;
 }
 
-interface Staff {
+export interface Staff {
   id: number;
   docente: string;
   evaluacion: number;

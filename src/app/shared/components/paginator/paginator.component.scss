@@ -1,0 +1,32 @@
+mat-toolbar {
+  height: 52px !important;
+  border-radius: 0 0 9px 9px !important;
+}
+
+.mat-toolbar {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.54);
+}
+button {
+  border: none !important;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+@media (max-width: 576px) {
+  mat-toolbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    height: auto !important;
+  }
+
+  .responsive-view {
+    margin-left: 0px !important;
+  }
+
+  .margin-for-mobile {
+    margin-top: 0px;
+  }
+}

@@ -15,6 +15,7 @@ import { ValidatorErrorMessageComponent } from '../shared/components/validator-e
 import { ValidatorErrorMessagePipe } from '../shared/pipes/validator-error-message.pipe';
 import { AuthService } from '../core/services/auth.service';
 import { Router } from '@angular/router';
+import { LocalStorageKeys } from '../core/constants/localstorage-keys';
 
 @Component({
   selector: 'app-login',
@@ -52,7 +53,15 @@ export class LoginComponent {
     const username = this.loginForm.value.username;
 
     if (!username) return;
-    this.authService.login(username);
-    this.router.navigateByUrl('');
+    this.authService
+      .login()
+      .pipe()
+      .subscribe((res) => {
+        if (res.state) {
+          localStorage.setItem(LocalStorageKeys.TOKEN, res.token);
+          localStorage.setItem(LocalStorageKeys.USERNAME, username);
+        }
+        this.router.navigateByUrl('');
+      });
   }
 }

@@ -1,0 +1,45 @@
+<mat-toolbar *ngIf="length > 0">
+  <span style="margin-left: 20%" class="responsive-view">
+    {{ 1 + pageOffset * pageIndex }} -
+    {{
+      pageOffset * (pageIndex + 1) <= length
+        ? pageOffset * (pageIndex + 1)
+        : length
+    }}
+    de {{ length }}</span
+  >
+  <span style="margin-left: 20%" class="responsive-view margin-for-mobile">
+    <button
+      mat-icon-button
+      [disabled]="pageIndex <= 0"
+      (click)="getFirstPage()"
+      matTooltip="Primera página"
+    >
+      <mat-icon>first_page</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      [disabled]="pageIndex <= 0"
+      (click)="getPreviousPage()"
+      matTooltip="Anterior"
+    >
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      [disabled]="this.pageOffset * (this.pageIndex + 1) >= length"
+      (click)="getNextPage()"
+      matTooltip="Siguiente"
+    >
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      [disabled]="this.pageOffset * (this.pageIndex + 1) >= length"
+      (click)="getLastPage()"
+      matTooltip="Última página"
+    >
+      <mat-icon>last_page</mat-icon>
+    </button>
+  </span>
+</mat-toolbar>

@@ -10,12 +10,20 @@ import { Observable } from 'rxjs';
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  public login(username: string): Observable<JWT> {
-    localStorage.setItem(LocalStorageKeys.USERNAME, username);
+  public login(): Observable<JWT> {
     return this.http.get<JWT>('./assets/data/login.json');
   }
 
   getUsername() {
     return localStorage.getItem(LocalStorageKeys.USERNAME);
+  }
+
+  isLoggedIn() {
+    return localStorage.getItem(LocalStorageKeys.TOKEN) !== null;
+  }
+
+  logout() {
+    localStorage.clear();
+    window.location.reload();
   }
 }

@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { HttpClientModule } from '@angular/common/http';
-import { NavbarComponent } from './shared/components/navbar/navbar.component';
 
 @NgModule({
   declarations: [AppComponent],
