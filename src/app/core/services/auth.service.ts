@@ -3,23 +3,27 @@ import { LocalStorageKeys } from '../constants/localstorage-keys';
 import { HttpClient } from '@angular/common/http';
 import { JWT } from '../models/jwt.model';
 import { Observable } from 'rxjs';
+import { LocalstorageService } from './localstorage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private localStorageService: LocalstorageService
+  ) {}
 
   public login(): Observable<JWT> {
     return this.http.get<JWT>('./assets/data/login.json');
   }
 
   getUsername() {
-    return localStorage.getItem(LocalStorageKeys.USERNAME);
+    return this.localStorageService.getItem(LocalStorageKeys.USERNAME);
   }
 
   isLoggedIn() {
-    return localStorage.getItem(LocalStorageKeys.TOKEN) !== null;
+    return this.localStorageService.getItem(LocalStorageKeys.TOKEN) !== null;
   }
 
   logout() {

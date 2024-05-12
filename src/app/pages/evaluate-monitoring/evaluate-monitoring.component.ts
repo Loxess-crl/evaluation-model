@@ -19,6 +19,10 @@ import { PaginatorComponent } from 'src/app/shared/components/paginator/paginato
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { Subject, takeUntil } from 'rxjs';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSelectModule } from '@angular/material/select';
+import { LocalstorageService } from 'src/app/core/services/localstorage.service';
+import { LocalStorageKeys } from 'src/app/core/constants/localstorage-keys';
 
 @Component({
   selector: 'app-evaluate-monitoring',
@@ -31,6 +35,8 @@ import { Subject, takeUntil } from 'rxjs';
     MatIconModule,
     MatInputModule,
     MatTableModule,
+    MatTooltipModule,
+    MatSelectModule,
     MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
@@ -43,12 +49,15 @@ export class EvaluateMonitoringComponent {
   date = new Date();
   schools: School[] = [];
   pageIndex = 0;
-  pageOffset = 0;
+  pageOffset = 10;
   total = 0;
   staff = new MatTableDataSource<Staff>();
   displayedColumns = ['id', 'staff', 'estado'];
   loadingPage = true;
+  schoolSelected?: School;
+  staffSelected?: Staff;
   private assessmentService = inject(AssessmentService);
+  private localStorageService = inject(LocalstorageService);
   private _unsubscribeAll = new Subject();
 
   @ViewChild(PaginatorComponent, { static: true })
@@ -60,7 +69,6 @@ export class EvaluateMonitoringComponent {
       .subscribe((paginator) => {
         this.pageIndex = paginator.page;
         this.pageOffset = paginator.pageOffset;
-        this.getStaff();
         this.getSchools();
       });
   }
@@ -74,6 +82,12 @@ export class EvaluateMonitoringComponent {
     this.loadingPage = true;
     this.assessmentService.getSchoolsJson().subscribe((schools) => {
       this.schools = schools;
+      this.schoolSelected = schools[0];
+      this.localStorageService.setObject(
+        LocalStorageKeys.SCHOOL,
+        this.schoolSelected
+      );
+      this.getStaff();
       this.loadingPage = false;
     });
   }
@@ -91,6 +105,15 @@ export class EvaluateMonitoringComponent {
 
   onDateChange(event: MatDatepickerInputEvent<Date>) {
     this.date = event.value!;
+  }
+
+  onSchoolChange(event: any) {
+    this.schoolSelected = event.value;
+    this.localStorageService.setObject(
+      LocalStorageKeys.SCHOOL,
+      this.schoolSelected
+    );
+    this.getStaff();
   }
 
   evaluarStaff(staff: Staff) {

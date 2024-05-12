@@ -1,10 +1,31 @@
 <mat-toolbar>
   <span>Evaluation Model</span>
   <span class="spacer"></span>
-  <button mat-icon-button matTooltip="Perfil">
-    <mat-icon>person</mat-icon>
+  <button
+    mat-icon-button
+    [mat-menu-trigger-for]="notificacionesMenu"
+    matTooltip="Notificaciones"
+  >
+    <mat-icon [matBadge]="notifications" matBadgeColor="warn"
+      >notifications</mat-icon
+    >
   </button>
-  <button mat-icon-button (click)="logout()" matTooltip="Cerrar sesión">
-    <mat-icon>logout</mat-icon>
+  <button mat-icon-button [mat-menu-trigger-for]="perfilMenu" matTooltip="Menu">
+    <mat-icon>account_circle</mat-icon>
   </button>
+
+  <mat-menu #notificacionesMenu="matMenu">
+    <ng-template *ngIf="notifications > 0; else noNotifications">
+      <ng-container *ngFor="let notification of notificationList">
+        <span class="notifications">{{ notification }}</span>
+      </ng-container>
+    </ng-template>
+    <ng-template #noNotifications>
+      <span class="notifications">No hay notificaciones</span>
+    </ng-template>
+  </mat-menu>
+  <mat-menu #perfilMenu="matMenu">
+    <button mat-menu-item><mat-icon>person</mat-icon> Perfil</button>
+    <button mat-menu-item><mat-icon>logout</mat-icon> Cerrar sesión</button>
+  </mat-menu>
 </mat-toolbar>

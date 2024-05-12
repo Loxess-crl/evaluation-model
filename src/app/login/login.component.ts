@@ -16,6 +16,7 @@ import { ValidatorErrorMessagePipe } from '../shared/pipes/validator-error-messa
 import { AuthService } from '../core/services/auth.service';
 import { Router } from '@angular/router';
 import { LocalStorageKeys } from '../core/constants/localstorage-keys';
+import { LocalstorageService } from '../core/services/localstorage.service';
 
 @Component({
   selector: 'app-login',
@@ -36,6 +37,7 @@ import { LocalStorageKeys } from '../core/constants/localstorage-keys';
 export class LoginComponent {
   public showPassword = false;
   private authService = inject(AuthService);
+  private localStorageService = inject(LocalstorageService);
   private router = inject(Router);
 
   public loginForm = new FormGroup({
@@ -58,8 +60,8 @@ export class LoginComponent {
       .pipe()
       .subscribe((res) => {
         if (res.state) {
-          localStorage.setItem(LocalStorageKeys.TOKEN, res.token);
-          localStorage.setItem(LocalStorageKeys.USERNAME, username);
+          this.localStorageService.setItem(LocalStorageKeys.TOKEN, res.token);
+          this.localStorageService.setItem(LocalStorageKeys.USERNAME, username);
         }
         this.router.navigateByUrl('');
       });
