@@ -21,7 +21,7 @@ export class LocalstorageService {
     localStorage.setItem(key, JSON.stringify(value));
   }
 
-  getObject(key: LocalStorageKeys): any {
+  getObject(key: any): any {
     return JSON.parse(localStorage.getItem(key) || '{}');
   }
 

@@ -1,0 +1,78 @@
+<div class="evaluation" *ngIf="monitoringEvaluation; else noData">
+  <div class="evaluation_header">
+    <h2>{{ monitoringEvaluation.nombre }}</h2>
+    <h2>{{ monitoringEvaluation.date }}</h2>
+  </div>
+
+  <div class="evaluation_names">
+    <p>Evaluator: {{ evaluator }}</p>
+    <p>Evaluated: {{ monitoringEvaluation.staff.docente }}</p>
+  </div>
+
+  <div class="evaluation_table">
+    <table>
+      <thead>
+        <tr>
+          <ng-container *ngFor="let column of displayedColumns">
+            <th>{{ column }}</th>
+          </ng-container>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let rubric of rubrics; trackBy: trackByfn">
+          <tr>
+            <td class="table_factor" [rowSpan]="rubric.indicadores.length + 1">
+              {{ rubric.factor }}
+            </td>
+          </tr>
+          <ng-container
+            *ngFor="let indicator of rubric.indicadores; index as i"
+          >
+            <tr>
+              <td class="table_indicador">
+                {{ indicator.indicador }}
+              </td>
+              <td class="table_state">
+                <mat-form-field appearance="outline">
+                  <mat-select
+                    (selectionChange)="onSelectValor($event.value, indicator)"
+                  >
+                    <mat-option
+                      *ngFor="let valor of indicator.valores"
+                      [value]="valor"
+                    >
+                      {{ valor.valoracion }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </td>
+              <td class="table_rubric">
+                <span>
+                  {{ rubricSelectedDesc(indicator) }}
+                </span>
+              </td>
+              <td
+                class="table_recomendation"
+                [rowSpan]="rubric.indicadores.length + 1"
+                *ngIf="i == 0"
+              >
+                <textarea placeholder="Ingrese recomendacion"></textarea>
+              </td>
+            </tr>
+          </ng-container>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+
+  <h1>
+    Sin especificar bien los requerimientos no se entiende la página por sí sola
+  </h1>
+  <h1>
+    Ni siquiera el método de evaluación con la librería de chart que ha usado
+  </h1>
+</div>
+
+<ng-template #noData>
+  <p>No se han encontrado datos</p>
+</ng-template>

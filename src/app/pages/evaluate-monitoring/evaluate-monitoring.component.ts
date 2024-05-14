@@ -23,6 +23,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
 import { LocalstorageService } from 'src/app/core/services/localstorage.service';
 import { LocalStorageKeys } from 'src/app/core/constants/localstorage-keys';
+import { DateTimeHelper } from 'src/app/core/utils/DateTimeHelper';
+import { Router } from '@angular/router';
+import { MonitoringEvaluation } from 'src/app/core/models/monitoring-evaluation.model';
 
 @Component({
   selector: 'app-evaluate-monitoring',
@@ -58,6 +61,8 @@ export class EvaluateMonitoringComponent {
   staffSelected?: Staff;
   private assessmentService = inject(AssessmentService);
   private localStorageService = inject(LocalstorageService);
+  private dateTimeHelper = inject(DateTimeHelper);
+  private router = inject(Router);
   private _unsubscribeAll = new Subject();
 
   @ViewChild(PaginatorComponent, { static: true })
@@ -97,7 +102,16 @@ export class EvaluateMonitoringComponent {
     this.assessmentService
       .getStaffJson(this.pageIndex)
       .subscribe((staffJson) => {
-        this.staff.data = staffJson.data;
+        this.staff.data = staffJson.data.map((staff) => {
+          const monitoringName = this.getEvaluationMonitoringName(staff);
+          return {
+            ...staff,
+            evaluacion: this.localStorageService.getObject(monitoringName)
+              .evaluation
+              ? 1
+              : 0,
+          };
+        });
         this.total = staffJson.totalItems;
         this.loadingPage = false;
       });
@@ -117,6 +131,25 @@ export class EvaluateMonitoringComponent {
   }
 
   evaluarStaff(staff: Staff) {
-    /* zd */
+    if (!this.schoolSelected) return;
+    const date = this.dateTimeHelper.formatDateToString(this.date);
+    const monitoringName = this.getEvaluationMonitoringName(staff);
+    const monitoringEvaluation: MonitoringEvaluation = {
+      id: this.schoolSelected.id,
+      date,
+      evaluation: null,
+      nombre: this.schoolSelected.nombre,
+      staff,
+    };
+
+    this.assessmentService.setMonitoringEvaluation(monitoringEvaluation);
+    localStorage.setItem(monitoringName, JSON.stringify(monitoringEvaluation));
+    this.router.navigate(['/assessment', date, staff.id]);
+  }
+
+  getEvaluationMonitoringName(staff: Staff) {
+    return `monitoring-${this.dateTimeHelper.formatDateToString(this.date)}-${
+      this.schoolSelected?.id
+    }-${staff.id}`;
   }
 }

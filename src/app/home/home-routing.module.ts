@@ -22,6 +22,13 @@ const routes: Routes = [
           ).then((c) => c.EvaluateMonitoringComponent),
       },
       {
+        path: 'assessment/:date/:staff',
+        loadComponent: () =>
+          import(
+            '../pages/evaluate-monitoring/evaluation/evaluation.component'
+          ).then((c) => c.EvaluationComponent),
+      },
+      {
         path: 'assessment-certification',
         loadComponent: () =>
           import(
