@@ -61,7 +61,6 @@ export class EvaluateMonitoringComponent {
   staffSelected?: Staff;
   private assessmentService = inject(AssessmentService);
   private localStorageService = inject(LocalstorageService);
-  private dateTimeHelper = inject(DateTimeHelper);
   private router = inject(Router);
   private _unsubscribeAll = new Subject();
 
@@ -132,7 +131,7 @@ export class EvaluateMonitoringComponent {
 
   evaluarStaff(staff: Staff) {
     if (!this.schoolSelected) return;
-    const date = this.dateTimeHelper.formatDateToString(this.date);
+    const date = DateTimeHelper.formatDateToString(this.date);
     const monitoringName = this.getEvaluationMonitoringName(staff);
     const monitoringEvaluation: MonitoringEvaluation = {
       id: this.schoolSelected.id,
@@ -148,8 +147,8 @@ export class EvaluateMonitoringComponent {
   }
 
   getEvaluationMonitoringName(staff: Staff) {
-    return `monitoring-${this.dateTimeHelper.formatDateToString(this.date)}-${
-      this.schoolSelected?.id
-    }-${staff.id}`;
+    return `monitoringEvaluation-${DateTimeHelper.formatDateToString(
+      this.date
+    )}-${this.schoolSelected?.id}-${staff.id}`;
   }
 }

@@ -1,1 +1,125 @@
-<p>evaluate-certification works!</p>
+<div class="body">
+  <h2>Evaluar</h2>
+
+  <div class="main">
+    <div class="options">
+      <mat-form-field class="select" appearance="fill">
+        <mat-label>Seleccione Escuela</mat-label>
+        <mat-select
+          [value]="optionSelected"
+          (selectionChange)="optionSelected = $event.value"
+        >
+          <mat-option [value]="option" *ngFor="let option of options">
+            {{ option }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <ng-container *ngIf="optionSelected === 'Monitoreo'">
+        <mat-form-field appearance="outline" class="filtro">
+          <mat-label>Fecha</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            placeholder="Fecha"
+            [value]="date"
+            (dateChange)="onDateChange($event)"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </ng-container>
+    </div>
+
+    <div class="data">
+      <div class="table-school">
+        <table mat-table [dataSource]="schools">
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>Nº</th>
+            <td mat-cell *matCellDef="let school">
+              {{ school.id }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="school">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Colegio</th>
+            <td mat-cell *matCellDef="let school">{{ school.nombre }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="estado">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+            <td mat-cell *matCellDef="let school">
+              <button
+                mat-stroked-button
+                matTooltip="Evaluar"
+                color="warn"
+                (click)="schoolSelected = school"
+              >
+                Evaluar
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+          <tr class="mat-row" *matNoDataRow>
+            <td
+              class="mat-cell"
+              colspan="7"
+              *ngIf="!loadingPage; else cargando"
+            >
+              <p>No se han encontrado datos</p>
+            </td>
+            <ng-template #cargando>
+              <td class="mat-cell" colspan="7">
+                <span>Cargando...</span>
+              </td>
+            </ng-template>
+          </tr>
+        </table>
+        <app-paginator
+          [length]="total"
+          [pageOffset]="pageOffset"
+          [pageIndex]="pageIndex"
+        ></app-paginator>
+      </div>
+
+      <div class="school">
+        <div
+          class="school-profile"
+          *ngIf="schoolSelected; else noSchoolSelected"
+        >
+          <div class="school-image">
+            <img
+              [src]="
+                'https://cataas.com/cat/says/' +
+                schoolSelected.nombre.split(' ').at(1) +
+                schoolSelected.nombre.split(' ').at(2) +
+                schoolSelected.nombre.split(' ').at(3) +
+                '?width=100&height=100'
+              "
+              alt="school_image"
+            />
+          </div>
+          <h3>{{ schoolSelected.nombre }}</h3>
+          <button
+            mat-raised-button
+            (click)="evaluarSchool(schoolSelected)"
+            color="primary"
+            matTooltip="Evaluar"
+          >
+            Evaluar
+          </button>
+        </div>
+        <ng-template #noSchoolSelected>
+          <div class="no-school">
+            <span>Seleccione un colegio para empezar</span>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

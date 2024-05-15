@@ -1,46 +1,50 @@
 <div class="login">
-  <h1>Login</h1>
-
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div class="field-username">
-      <mat-form-field appearance="outline">
-        <mat-label>Username</mat-label>
-        <input
-          type="text"
-          formControlName="username"
-          matInput
-          placeholder="Ex. Loxess"
-          required
-        />
-      </mat-form-field>
-      <validator-error-message
-        [controlName]="loginForm.get('username')!"
-      ></validator-error-message>
-    </div>
-    <div class="field-password">
-      <mat-form-field appearance="outline">
-        <mat-label>Password</mat-label>
-        <input
-          [type]="showPassword ? 'text' : 'password'"
-          formControlName="password"
-          matInput
-          placeholder="Ex. 123456"
-        />
-        <button
-          matSuffix
-          mat-icon-button
-          (click)="showPassword = !showPassword"
-        >
-          <mat-icon>{{
-            showPassword ? "visibility_off" : "visibility"
-          }}</mat-icon>
-        </button>
-      </mat-form-field>
-      <validator-error-message
-        [controlName]="loginForm.get('password')!"
-      ></validator-error-message>
+  <div class="form">
+    <div class="form_title">
+      <h1>Inicia sesión</h1>
     </div>
 
-    <button type="submit" mat-raised-button color="primary">Login</button>
-  </form>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="field-username">
+        <mat-form-field appearance="outline">
+          <mat-label>Username</mat-label>
+          <input
+            type="text"
+            formControlName="username"
+            matInput
+            placeholder="Ex. Loxess"
+            required
+          />
+        </mat-form-field>
+        <validator-error-message
+          [controlName]="loginForm.get('username')!"
+        ></validator-error-message>
+      </div>
+      <div class="field-password">
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            formControlName="password"
+            matInput
+            placeholder="Ex. 123456"
+          />
+          <button
+            matSuffix
+            mat-icon-button
+            (click)="showPassword = !showPassword"
+          >
+            <mat-icon>{{
+              showPassword ? "visibility_off" : "visibility"
+            }}</mat-icon>
+          </button>
+        </mat-form-field>
+        <validator-error-message
+          [controlName]="loginForm.get('password')!"
+        ></validator-error-message>
+      </div>
+
+      <button type="submit" mat-raised-button color="primary">Login</button>
+    </form>
+  </div>
 </div>

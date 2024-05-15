@@ -4,7 +4,10 @@ import { Observable } from 'rxjs';
 import { School } from '../models/school.model';
 import { StaffPagination } from '../models/staff-pagination.model';
 import { Factores } from '../models/factores.model';
-import { MonitoringEvaluation } from '../models/monitoring-evaluation.model';
+import {
+  CertificationEvaluation,
+  MonitoringEvaluation,
+} from '../models/monitoring-evaluation.model';
 import { LocalstorageService } from './localstorage.service';
 import { LocalStorageKeys } from '../constants/localstorage-keys';
 
@@ -13,6 +16,7 @@ import { LocalStorageKeys } from '../constants/localstorage-keys';
 })
 export class AssessmentService {
   monitoringEvaluation?: MonitoringEvaluation;
+  certificationEvaluation?: CertificationEvaluation;
   constructor(
     private http: HttpClient,
     private localStorageService: LocalstorageService
@@ -36,6 +40,16 @@ export class AssessmentService {
     this.monitoringEvaluation = monitoringEvaluation;
   }
 
+  public setCertificationEvaluation(
+    certificationEvaluation: CertificationEvaluation
+  ) {
+    this.certificationEvaluation = certificationEvaluation;
+  }
+
+  public getCertificationEvaluation() {
+    return this.certificationEvaluation || null;
+  }
+
   public getMonitoringEvaluation(date: string, staff: string) {
     if (!this.monitoringEvaluation) {
       const school = this.localStorageService.getObject(
@@ -43,7 +57,7 @@ export class AssessmentService {
       ).id;
       if (!school) return null;
       const monitoringEvaluation = this.localStorageService.getObject(
-        `monitoring-${date}-${school}-${staff}`
+        `monitoringEvaluation-${date}-${school}-${staff}`
       );
       if (monitoringEvaluation) {
         this.monitoringEvaluation = monitoringEvaluation;

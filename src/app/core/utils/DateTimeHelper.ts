@@ -1,8 +1,3 @@
-import { Injectable } from '@angular/core';
-
-@Injectable({
-  providedIn: 'root',
-})
 export class DateTimeHelper {
   constructor() {}
   /**
@@ -10,7 +5,7 @@ export class DateTimeHelper {
    * @param date Fecha a formatear
    * @returns Fecha en formato YYYY-MM-DD
    */
-  formatDateToString(date: Date): string {
+  static formatDateToString(date: Date): string {
     const day = date.getDate();
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
