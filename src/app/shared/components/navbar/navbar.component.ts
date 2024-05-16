@@ -7,6 +7,8 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatMenuModule } from '@angular/material/menu';
 import { CommonModule } from '@angular/common';
+import { SidenavService } from 'src/app/core/services/sidenav.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -20,6 +22,7 @@ import { CommonModule } from '@angular/common';
     MatTooltipModule,
     MatBadgeModule,
     MatMenuModule,
+    RouterModule,
   ],
   standalone: true,
 })
@@ -28,6 +31,12 @@ export class NavbarComponent {
   notificationList = [];
 
   private authService = inject(AuthService);
+  private sidenavService = inject(SidenavService);
+
+  overlay() {
+    this.sidenavService.changeOverlay();
+  }
+
   logout() {
     this.authService.logout();
   }

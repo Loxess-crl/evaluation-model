@@ -52,6 +52,10 @@ export class LoginComponent {
   });
 
   onSubmit() {
+    if (!this.loginForm.valid) {
+      this.loginForm.markAllAsTouched();
+      return;
+    }
     const username = this.loginForm.value.username;
 
     if (!username) return;

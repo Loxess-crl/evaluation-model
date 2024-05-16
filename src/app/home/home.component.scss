@@ -1,23 +1,40 @@
+$animate: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
 .home {
   display: flex;
+  justify-content: flex-end;
 
   main,
   .sidenav {
     box-sizing: border-box;
   }
   .sidenav {
+    position: fixed;
+    left: 0;
     height: 100vh;
     background-color: #f8f9fa;
     border-right: 1px solid #e9ecef;
     padding-top: 20px;
     padding: 1rem;
+    width: 15%;
+    transition: left $animate;
   }
 
   .main {
-    width: 100%;
+    width: 85%;
+    transition: width $animate;
   }
 
   main {
     padding: 2rem;
+  }
+
+  &.overlay {
+    .sidenav {
+      left: -15%;
+    }
+    .main {
+      width: 100%;
+    }
   }
 }

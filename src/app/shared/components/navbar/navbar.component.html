@@ -1,6 +1,11 @@
 <mat-toolbar>
+  <button (click)="overlay()" mat-icon-button>
+    <mat-icon>menu</mat-icon>
+  </button>
+
   <span>Evaluation Model</span>
   <span class="spacer"></span>
+
   <button
     mat-icon-button
     [mat-menu-trigger-for]="notificacionesMenu"
@@ -10,6 +15,7 @@
       >notifications</mat-icon
     >
   </button>
+
   <button mat-icon-button [mat-menu-trigger-for]="perfilMenu" matTooltip="Menu">
     <mat-icon>account_circle</mat-icon>
   </button>
@@ -20,12 +26,19 @@
         <span class="notifications">{{ notification }}</span>
       </ng-container>
     </ng-template>
+
     <ng-template #noNotifications>
       <span class="notifications">No hay notificaciones</span>
     </ng-template>
   </mat-menu>
+
   <mat-menu #perfilMenu="matMenu">
-    <button mat-menu-item><mat-icon>person</mat-icon> Perfil</button>
-    <button mat-menu-item><mat-icon>logout</mat-icon> Cerrar sesión</button>
+    <button mat-menu-item routerLink="profile">
+      <mat-icon>person</mat-icon> Perfil
+    </button>
+
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>logout</mat-icon> Cerrar sesión
+    </button>
   </mat-menu>
 </mat-toolbar>
