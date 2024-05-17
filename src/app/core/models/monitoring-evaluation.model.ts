@@ -1,9 +1,10 @@
+import { Factores } from './factores.model';
 import { Staff } from './staff-pagination.model';
 
 export interface MonitoringEvaluation {
   id: number;
   date: string;
-  evaluation: any;
+  evaluation: Factores[] | null;
   nombre: string;
   staff: Staff;
 }

@@ -12,11 +12,25 @@ export class SidenavService {
     overlay: false,
   });
 
+  certifications = new BehaviorSubject<{
+    assessments: number;
+    evaluations: number;
+  }>({
+    assessments: 0,
+    evaluations: 0,
+  });
+
   constructor() {}
 
   changeOverlay() {
     this.config.next({
       overlay: !this.config.value.overlay,
     });
+  }
+
+  addCertification(type: 'assessments' | 'evaluations') {
+    const certifications = this.certifications.value;
+    certifications[type]++;
+    this.certifications.next(certifications);
   }
 }

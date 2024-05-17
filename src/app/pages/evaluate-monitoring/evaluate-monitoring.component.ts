@@ -62,7 +62,7 @@ export class EvaluateMonitoringComponent {
   private assessmentService = inject(AssessmentService);
   private localStorageService = inject(LocalstorageService);
   private router = inject(Router);
-  private _unsubscribeAll = new Subject();
+  private _unsubscribeAll = new Subject<void>();
 
   @ViewChild(PaginatorComponent, { static: true })
   paginator: PaginatorComponent = new PaginatorComponent();
@@ -78,7 +78,7 @@ export class EvaluateMonitoringComponent {
   }
 
   ngOnDestroy(): void {
-    this._unsubscribeAll.next(null);
+    this._unsubscribeAll.next();
     this._unsubscribeAll.complete();
   }
 
@@ -118,6 +118,7 @@ export class EvaluateMonitoringComponent {
 
   onDateChange(event: MatDatepickerInputEvent<Date>) {
     this.date = event.value!;
+    this.getStaff();
   }
 
   onSchoolChange(event: any) {
@@ -133,13 +134,16 @@ export class EvaluateMonitoringComponent {
     if (!this.schoolSelected) return;
     const date = DateTimeHelper.formatDateToString(this.date);
     const monitoringName = this.getEvaluationMonitoringName(staff);
-    const monitoringEvaluation: MonitoringEvaluation = {
-      id: this.schoolSelected.id,
-      date,
-      evaluation: null,
-      nombre: this.schoolSelected.nombre,
-      staff,
-    };
+    const monitoringEvaluation: MonitoringEvaluation =
+      staff.evaluacion === 1
+        ? this.localStorageService.getObject(monitoringName)
+        : {
+            id: this.schoolSelected.id,
+            date,
+            evaluation: null,
+            nombre: this.schoolSelected.nombre,
+            staff,
+          };
 
     this.assessmentService.setMonitoringEvaluation(monitoringEvaluation);
     localStorage.setItem(monitoringName, JSON.stringify(monitoringEvaluation));

@@ -28,10 +28,21 @@ import { RouterModule } from '@angular/router';
 })
 export class NavbarComponent {
   notifications = 0;
-  notificationList = [];
+  notificationList = {
+    assessments: 0,
+    evaluations: 0,
+  };
 
   private authService = inject(AuthService);
   private sidenavService = inject(SidenavService);
+
+  ngOnInit() {
+    this.sidenavService.certifications.subscribe((certifications) => {
+      this.notificationList = certifications;
+      this.notifications =
+        certifications.assessments + certifications.evaluations;
+    });
+  }
 
   overlay() {
     this.sidenavService.changeOverlay();

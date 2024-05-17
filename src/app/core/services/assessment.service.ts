@@ -55,7 +55,9 @@ export class AssessmentService {
       const school = this.localStorageService.getObject(
         LocalStorageKeys.SCHOOL
       ).id;
+
       if (!school) return null;
+
       const monitoringEvaluation = this.localStorageService.getObject(
         `monitoringEvaluation-${date}-${school}-${staff}`
       );

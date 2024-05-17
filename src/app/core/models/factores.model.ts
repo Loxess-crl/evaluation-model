@@ -7,7 +7,7 @@ export interface Factores {
   hora: null;
   idfactor: number;
   factor: string;
-  recomendacion: null;
+  recomendacion?: string;
   compromiso: null;
   indicadores: Indicador[];
 }
@@ -16,6 +16,7 @@ export interface Indicador {
   idindicador: number;
   indicador: string;
   valores: Valor[];
+  currentValor?: string;
 }
 
 export interface Valor {

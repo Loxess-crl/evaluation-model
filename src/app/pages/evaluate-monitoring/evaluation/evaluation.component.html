@@ -4,9 +4,15 @@
     <h2>{{ monitoringEvaluation.date }}</h2>
   </div>
 
-  <div class="evaluation_names">
-    <p>Evaluator: {{ evaluator }}</p>
-    <p>Evaluated: {{ monitoringEvaluation.staff.docente }}</p>
+  <div class="evaluation_datos">
+    <div class="evaluation_datos-names">
+      <p>Evaluator: {{ evaluator }}</p>
+      <p>Evaluated: {{ monitoringEvaluation.staff.docente }}</p>
+    </div>
+
+    <div class="evaluation_datos-percent" [ngClass]="percent_class">
+      <span>{{ percent }}%</span>
+    </div>
   </div>
 
   <div class="evaluation_table">
@@ -34,8 +40,10 @@
               </td>
               <td class="table_state">
                 <mat-form-field appearance="outline">
+                  <mat-label>Selecciona valor</mat-label>
                   <mat-select
                     (selectionChange)="onSelectValor($event.value, indicator)"
+                    [value]="currentValue(indicator)"
                   >
                     <mat-option
                       *ngFor="let valor of indicator.valores"
@@ -56,7 +64,12 @@
                 [rowSpan]="rubric.indicadores.length + 1"
                 *ngIf="i == 0"
               >
-                <textarea placeholder="Ingrese recomendacion"></textarea>
+                <form [formGroup]="recomendationsForm">
+                  <textarea
+                    placeholder="Ingrese recomendacion"
+                    [formControlName]="rubric.factor"
+                  ></textarea>
+                </form>
               </td>
             </tr>
           </ng-container>
@@ -64,13 +77,11 @@
       </tbody>
     </table>
   </div>
-
-  <h1>
-    Sin especificar bien los requerimientos no se entiende la página por sí sola
-  </h1>
-  <h1>
-    Ni siquiera el método de evaluación con la librería de chart que ha usado
-  </h1>
+  <div class="save">
+    <button mat-raised-button color="primary" (click)="saveEvaluation()">
+      Guardar
+    </button>
+  </div>
 </div>
 
 <ng-template #noData>

@@ -21,15 +21,12 @@
   </button>
 
   <mat-menu #notificacionesMenu="matMenu">
-    <ng-template *ngIf="notifications > 0; else noNotifications">
-      <ng-container *ngFor="let notification of notificationList">
-        <span class="notifications">{{ notification }}</span>
-      </ng-container>
-    </ng-template>
-
-    <ng-template #noNotifications>
-      <span class="notifications">No hay notificaciones</span>
-    </ng-template>
+    <p class="notifications">
+      {{ notificationList.assessments }} certification assessments
+    </p>
+    <p class="notifications">
+      {{ notificationList.evaluations }} accreditation evaluations
+    </p>
   </mat-menu>
 
   <mat-menu #perfilMenu="matMenu">
