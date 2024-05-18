@@ -46,12 +46,12 @@ export class EvaluateCertificationComponent {
   pageIndex = 0;
   pageOffset = 10;
   total = 0;
-  schools = new MatTableDataSource<School>();
+  schools = new MatTableDataSource<CertificationEvaluation>();
   displayedColumns = ['id', 'school', 'estado'];
   options = ['Diagnostico', 'Monitoreo', 'Control de Corte'];
   optionSelected = this.options.at(0);
   loadingPage = true;
-  schoolSelected?: School;
+  schoolSelected?: CertificationEvaluation;
   private assessmentService = inject(AssessmentService);
   private router = inject(Router);
   private _unsubscribeAll = new Subject();
@@ -65,7 +65,7 @@ export class EvaluateCertificationComponent {
       .subscribe((paginator) => {
         this.pageIndex = paginator.page;
         this.pageOffset = paginator.pageOffset;
-        this.getSchools();
+        this.getAsessmentSchools();
       });
   }
 
@@ -74,10 +74,10 @@ export class EvaluateCertificationComponent {
     this._unsubscribeAll.complete();
   }
 
-  getSchools() {
+  getAsessmentSchools() {
     this.loadingPage = true;
-    this.assessmentService.getSchoolsJson().subscribe((schools) => {
-      this.schools = new MatTableDataSource(schools);
+    this.assessmentService.getAssessmentSchool().subscribe((schools) => {
+      this.schools = new MatTableDataSource(schools.data);
       this.loadingPage = false;
     });
   }
@@ -86,19 +86,16 @@ export class EvaluateCertificationComponent {
     this.date = event.value!;
   }
 
-  evaluarSchool(school: School) {
+  evaluarSchool(school: CertificationEvaluation) {
     const date = DateTimeHelper.formatDateToString(this.date);
     const monitoringName = this.getCertificationEvaluationName(school);
     const monitoringEvaluation: CertificationEvaluation = {
-      id: school.id,
+      ...school,
       date,
       evaluationFilter: null,
-      name: school.nombre,
-      evaluated: 0,
       type: 'Diagnostico',
     };
 
-    this.assessmentService.setCertificationEvaluation(monitoringEvaluation);
     localStorage.setItem(monitoringName, JSON.stringify(monitoringEvaluation));
     this.router.navigate([
       '/assessment-certification',
@@ -108,7 +105,7 @@ export class EvaluateCertificationComponent {
     ]);
   }
 
-  getCertificationEvaluationName(school: School) {
+  getCertificationEvaluationName(school: CertificationEvaluation) {
     return `certificationEvaluation-${DateTimeHelper.formatDateToString(
       this.date
     )}-${school.id}`;

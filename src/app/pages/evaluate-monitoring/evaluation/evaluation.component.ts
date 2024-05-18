@@ -9,6 +9,7 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { LocalStorageKeys } from 'src/app/core/constants/localstorage-keys';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import {
   FormControl,
   FormGroup,
@@ -29,6 +30,7 @@ import { SidenavService } from 'src/app/core/services/sidenav.service';
     MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
+    MatSnackBarModule,
   ],
   templateUrl: './evaluation.component.html',
   styleUrls: ['./evaluation.component.scss'],
@@ -38,6 +40,7 @@ export class EvaluationComponent {
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   private sidenavService = inject(SidenavService);
+  private snackBar = inject(MatSnackBar);
   private dateCurrent = this.route.snapshot.params['date'];
   private staffCurrent = this.route.snapshot.params['staff'];
   public monitoringEvaluation = this.assessmentService.getMonitoringEvaluation(
@@ -135,11 +138,13 @@ export class EvaluationComponent {
       rubric.recomendacion = this.recomendationsForm.get(rubric.factor)?.value;
     });
     this.monitoringEvaluation!.evaluation = this.rubrics;
-    this.assessmentService.setMonitoringEvaluation(this.monitoringEvaluation!);
     localStorage.setItem(
       `monitoringEvaluation-${date}-${school}-${staff}`,
       JSON.stringify(this.monitoringEvaluation)
     );
     this.sidenavService.addCertification('evaluations');
+    this.snackBar.open('Saved Accreditation Assessment', 'Close', {
+      duration: 5000,
+    });
   }
 }

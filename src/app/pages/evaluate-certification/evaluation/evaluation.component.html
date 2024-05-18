@@ -1,1 +1,80 @@
-<p>evaluation works!</p>
+<div class="evaluation">
+  <div class="evaluation_header">
+    <span>
+      {{ assessmentCertification.name }} / {{ assessmentCertification.type }}
+    </span>
+    <span>{{ assessmentCertification.date }}</span>
+  </div>
+
+  <div class="evaluation_body">
+    <mat-accordion>
+      <mat-expansion-panel
+        hideToggle
+        *ngFor="
+          let certification of filterAssessmentCertification.certifications
+        "
+        [expanded]="certification.show"
+        (opened)="certification.show = true"
+        (closed)="certification.show = false"
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ certification.name }}: </mat-panel-title>
+          <mat-panel-description>{{
+            certification.description
+          }}</mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="evaluation_body-content">
+          <table mat-table [dataSource]="certification.requirements">
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef>Nº</th>
+              <td mat-cell *matCellDef="let requirement">
+                {{ requirement.id }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="requirement">
+              <th mat-header-cell *matHeaderCellDef>Requirement</th>
+              <td mat-cell *matCellDef="let requirement">
+                {{ requirement.name }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="estado">
+              <th mat-header-cell *matHeaderCellDef>Estado</th>
+              <td mat-cell *matCellDef="let requierement">
+                <button
+                  mat-stroked-button
+                  matTooltip="Evaluar"
+                  color="warn"
+                  (click)="requirementSelected = requierement"
+                >
+                  Sin Evaluar
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" colspan="7">
+                <p>No se han encontrado datos</p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <div class="forms">
+      <mat-form-field appearance="outline">
+        <mat-label>Hallazgos</mat-label>
+        <textarea matInput> </textarea>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Recomendaciones</mat-label>
+        <textarea matInput> </textarea>
+      </mat-form-field>
+    </div>
+  </div>
+</div>

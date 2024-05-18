@@ -6,6 +6,8 @@ import { StaffPagination } from '../models/staff-pagination.model';
 import { Factores } from '../models/factores.model';
 import {
   CertificationEvaluation,
+  CertificationEvaluationResponse,
+  FilterAssessmentCertification,
   MonitoringEvaluation,
 } from '../models/monitoring-evaluation.model';
 import { LocalstorageService } from './localstorage.service';
@@ -15,8 +17,6 @@ import { LocalStorageKeys } from '../constants/localstorage-keys';
   providedIn: 'root',
 })
 export class AssessmentService {
-  monitoringEvaluation?: MonitoringEvaluation;
-  certificationEvaluation?: CertificationEvaluation;
   constructor(
     private http: HttpClient,
     private localStorageService: LocalstorageService
@@ -32,39 +32,45 @@ export class AssessmentService {
     );
   }
 
+  public getAssessmentSchool(): Observable<CertificationEvaluationResponse> {
+    return this.http.get<CertificationEvaluationResponse>(
+      './assets/data/assessment-school.json'
+    );
+  }
+
+  public getFilterAssessmentCertification(): Observable<FilterAssessmentCertification> {
+    return this.http.get<FilterAssessmentCertification>(
+      './assets/data/filter-assessment-certification.json'
+    );
+  }
+
   public getAssessmentMonitoring(): Observable<Factores[]> {
     return this.http.get<Factores[]>('./assets/data/rubrics.json');
   }
 
-  public setMonitoringEvaluation(monitoringEvaluation: MonitoringEvaluation) {
-    this.monitoringEvaluation = monitoringEvaluation;
-  }
+  public getMonitoringEvaluation(
+    date: string,
+    staff: string
+  ): MonitoringEvaluation | null {
+    const school = this.localStorageService.getObject(
+      LocalStorageKeys.SCHOOL
+    ).id;
 
-  public setCertificationEvaluation(
-    certificationEvaluation: CertificationEvaluation
-  ) {
-    this.certificationEvaluation = certificationEvaluation;
-  }
+    if (!school) return null;
 
-  public getCertificationEvaluation() {
-    return this.certificationEvaluation || null;
-  }
-
-  public getMonitoringEvaluation(date: string, staff: string) {
-    if (!this.monitoringEvaluation) {
-      const school = this.localStorageService.getObject(
-        LocalStorageKeys.SCHOOL
-      ).id;
-
-      if (!school) return null;
-
-      const monitoringEvaluation = this.localStorageService.getObject(
+    return (
+      this.localStorageService.getObject(
         `monitoringEvaluation-${date}-${school}-${staff}`
-      );
-      if (monitoringEvaluation) {
-        this.monitoringEvaluation = monitoringEvaluation;
-      }
-    }
-    return this.monitoringEvaluation || null;
+      ) || null
+    );
+  }
+
+  public getAssessmentCertification(
+    school: string,
+    date: string
+  ): CertificationEvaluation {
+    return this.localStorageService.getObject(
+      `certificationEvaluation-${date}-${school}`
+    );
   }
 }

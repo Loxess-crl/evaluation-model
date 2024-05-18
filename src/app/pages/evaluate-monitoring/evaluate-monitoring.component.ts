@@ -145,7 +145,6 @@ export class EvaluateMonitoringComponent {
             staff,
           };
 
-    this.assessmentService.setMonitoringEvaluation(monitoringEvaluation);
     localStorage.setItem(monitoringName, JSON.stringify(monitoringEvaluation));
     this.router.navigate(['/assessment', date, staff.id]);
   }
